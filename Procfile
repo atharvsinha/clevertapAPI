@@ -1,1 +1,1 @@
-web:gunicorn run:clevertap
+web: gunicorn --bind 0.0.0.0:$PORT clevertap:app 
