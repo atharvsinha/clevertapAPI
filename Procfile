@@ -1,1 +1,1 @@
-web: gunicorn run:clevertap
+web:gunicorn run:clevertap
