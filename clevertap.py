@@ -96,7 +96,7 @@ def upload_file():
     data.columns = ['identity', 'ts', 'type', 'evtName', 'evtData', 'slotDate', 'teacherName', 'category', 'feedbackForm', 'learningMaterial', 'courseTitle', 'page',
                     'platform', 'source', 'medium', 'utm_ID', 'lessonNumber', 'courseUrl', 'type.1', 'profileData', 'customerType', 'parentName', 'childName', 'childBirthdate']
 
-    return f'''{JSONify(data)}<div><a href="/"><button> Upload more files?</button></a></div>'''
+    return {JSONify(data)}
 
 
 if __name__ == '__main__':
