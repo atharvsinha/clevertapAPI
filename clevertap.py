@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+import time
 from flask import Flask, render_template, request
 
 
@@ -10,10 +11,14 @@ def JSONify(data):
         temp = {}
         for j in range(4):
             column = list(data.keys())[j]
-            try:
-                temp[column] = int(data.iloc[i][column])
-            except:
-                temp[column] = str(data.iloc[i][column])
+            if column=='ts':
+                temp[column] = round(time.time(), 0)
+                
+            else:
+                try:
+                    temp[column] = int(data.iloc[i][column])
+                except:
+                    temp[column] = str(data.iloc[i][column])
         temp1 = {}
         for j in range(5, 18):
             column = list(data.keys())[j]
@@ -33,11 +38,8 @@ def JSONify(data):
         except:
             temps[column] = str(data.iloc[i][column])
         column = data.keys()[1]
-
-        try:
-            temps[column] = int(data.iloc[i][column])
-        except:
-            temps[column] = str(data.iloc[i][column])
+        temps[column] = round(time.time(), 0)
+        
         column = data.keys()[18]
         try:
             temps['type'] = int(data.iloc[i][column])
@@ -64,20 +66,20 @@ def JSONify(data):
         'Content-Type': 'application/json; charset=utf-8',
     }
 
-    data = f'''{user}'''
-    response1 = requests.post(
-        'https://api.clevertap.com/1/upload', headers=headers, data=data)
+    # data = f'''{user}'''
+    # response1 = requests.post(
+    #     'https://api.clevertap.com/1/upload', headers=headers, data=data)
 
-    print(response1.json())
+    # print(response1.json())
     data = f'''{events}'''
     response2 = requests.post(
-        'https://api.clevertap.com/1/upload', headers=headers, data=data)
-    print(response2.json())
+        'https://api.clevertap.com/1/upload?dryRun=1', headers=headers, data=data)
+    print(data)
 
-    if response1.json()['status'] == response2.json()['status'] == 'success':
-        return 'success'
-    else:
-        return 'fail'
+    # if response1.json()['status'] == response2.json()['status'] == 'success':
+    #     return 'success'
+    # else:
+    #     return 'fail'
 
 
 app = Flask(__name__, template_folder='templates')
