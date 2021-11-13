@@ -66,20 +66,20 @@ def JSONify(data):
         'Content-Type': 'application/json; charset=utf-8',
     }
 
-    # data = f'''{user}'''
-    # response1 = requests.post(
-    #     'https://api.clevertap.com/1/upload', headers=headers, data=data)
+    data = f'''{user}'''
+    response1 = requests.post(
+        'https://api.clevertap.com/1/upload', headers=headers, data=data)
 
-    # print(response1.json())
+    print(response1.json())
     data = f'''{events}'''
     response2 = requests.post(
         'https://api.clevertap.com/1/upload?dryRun=1', headers=headers, data=data)
     print(data)
 
-    # if response1.json()['status'] == response2.json()['status'] == 'success':
-    #     return 'success'
-    # else:
-    #     return 'fail'
+    if response1.json()['status'] == response2.json()['status'] == 'success':
+        return 'success'
+    else:
+        return 'fail'
 
 
 app = Flask(__name__, template_folder='templates')
