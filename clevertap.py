@@ -74,7 +74,7 @@ def JSONify(data):
 
     events = f'''{events}'''
     response2 = requests.post(
-        'https://api.clevertap.com/1/upload?dryRun=1', headers=headers, data=events)
+        'https://api.clevertap.com/1/upload', headers=headers, data=events)
     if response1.json()['status'] == response2.json()['status'] == 'success':
         return 'success'
     else:
