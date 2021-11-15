@@ -66,16 +66,15 @@ def JSONify(data):
         'Content-Type': 'application/json; charset=utf-8',
     }
 
-    data = f'''{user}'''
+    usr = f'''{user}'''
     response1 = requests.post(
-        'https://api.clevertap.com/1/upload', headers=headers, data=data)
+        'https://api.clevertap.com/1/upload', headers=headers, data=usr)
 
     print(response1.json())
-    data = f'''{events}'''
-    response2 = requests.post(
-        'https://api.clevertap.com/1/upload?dryRun=1', headers=headers, data=data)
-    print(data)
 
+    events = f'''{events}'''
+    response2 = requests.post(
+        'https://api.clevertap.com/1/upload?dryRun=1', headers=headers, data=events)
     if response1.json()['status'] == response2.json()['status'] == 'success':
         return 'success'
     else:
