@@ -20,7 +20,7 @@ def JSONify(data):
                 except:
                     temp[column] = str(data.iloc[i][column])
         temp1 = {}
-        for j in range(5, 18):
+        for j in range(5, 20):
             column = list(data.keys())[j]
             try:
                 temp1[column] = int(data.iloc[i][column])
@@ -40,14 +40,14 @@ def JSONify(data):
         column = data.keys()[1]
         temps[column] = round(time.time(), 0)
         
-        column = data.keys()[18]
+        column = data.keys()[20]
         try:
             temps['type'] = int(data.iloc[i][column])
         except:
             temps['type'] = str(data.iloc[i][column])
 
         temp1 = {}
-        for j in range(19, len(data.keys())):
+        for j in range(22, len(data.keys())):
             column = list(data.keys())[j]
             try:
                 temp1[column] = int(data.iloc[i][column])
