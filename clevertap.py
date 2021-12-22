@@ -94,8 +94,7 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['file']
         data = pd.read_csv(f)
-    data.columns = ['identity', 'ts', 'type', 'evtName', 'evtData', 'slotDate', 'teacherName', 'category', 'feedbackForm', 'learningMaterial', 'courseTitle', 'page',
-                    'platform', 'source', 'medium', 'utm_ID', 'lessonNumber', 'courseUrl', 'type.1', 'profileData', 'customerType', 'parentName', 'childName', 'childBirthdate']
+    data.columns = ["Identity",	'ts',	'type',	'evtName',	'evtData',	'category',	'age group',	'course title',	'lesson number','lesson name',	'preferred date',	'parent name',	'email', 	'course url',	'platform',	'transaction date',	'channel',	'zoom link',	'learning material',	'feedback jotform',	'type.1',	'profileData',	'customer type',	'parent name',	'child name','child birthdate']
 
     return f'''{JSONify(data)}'''
 
