@@ -3,11 +3,9 @@ import requests
 import time
 from flask import Flask, render_template, request
 
-
 def JSONify (data):
     events = []
     user = []
-
     typeIndex = list(data.columns).index('type.1')
     profileIndex = list(data.columns).index('profileData')
     temp1 = {}
@@ -45,15 +43,17 @@ def JSONify (data):
     }
 
     usr = f'''{user}'''
+    usr = usr.encode(encoding='utf-8')
     response1 = requests.post(
         'https://api.clevertap.com/1/upload', headers=headers, data=usr)
 
     evt = f'''{events}'''
+    evt = evt.encode(encoding='utf-8')
     response2 = requests.post(
         'https://api.clevertap.com/1/upload', headers=headers, data=evt)
-
+    return  f'User: {response1.json()} \n Events:{response2.json()}'
     
-    return response1.json(), response2.json(), usr, evt
+    
     
 
 
